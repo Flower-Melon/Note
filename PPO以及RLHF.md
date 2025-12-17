@@ -1,8 +1,6 @@
-# 大模型微调范式
+# PPO和RLHF
 
-## 1 RLHF（Reinforcement Learning with Human Feedback）
-
-## 1.1 `PPO`回顾
+## 1 `PPO`回顾
 
 在此之前的`DRL`的学习过程中，我虽然实现了`PPO`方法，但是对其一些本质仍然称不上理解，借学习`RLHF`的机会，重新对其几个重要概念进行了理解
 
@@ -103,9 +101,7 @@ $$\hat A_t^{GAE} = {\delta _t} + (\gamma \lambda )\hat A_{t + 1}^{GAE}$$
 其中 $\lambda$ 为`GAE`的衰减系数，通常取值为0.95左右
 
 
-## 1.2 `PPO`在`RLHF`中的使用
-
-### 1.2.1 强化学习的概念在`LLM`中的对应
+## 2 `PPO`在`RLHF`中的使用
 
 在经过前面一系列的学习后，`LLM`输出自然语言的过程实际是不断输出`next token`的自回归过程，模型的输出实际上可以看作一个马尔可夫过程，符合强化学习适用的场景
 
@@ -114,8 +110,6 @@ $$\hat A_t^{GAE} = {\delta _t} + (\gamma \lambda )\hat A_{t + 1}^{GAE}$$
 > SFT（有监督微调）的本质是模仿，容易受限于训练数据的平均质量并因死记硬背产生幻觉；而RLHF（人类反馈强化学习）的核心是对齐，它利用判别比生成容易的数据优势，通过奖励机制打破概率分布的平均数陷阱，教会模型权衡说什么才是人类想要的，从而实现比单纯模仿更强的泛化能力和逻辑上限。
 
 因此我们自然想到在在大模型的微调时适用强化学习
-
-### 1.2.2 RLHF的结构
 
 ![RLHF结构](https://raw.githubusercontent.com/Flower-Melon/image/main/img/2025/RLHF结构.png)
 
@@ -127,7 +121,3 @@ $$\hat A_t^{GAE} = {\delta _t} + (\gamma \lambda )\hat A_{t + 1}^{GAE}$$
 * `Reference Model`：参考模型，它的作用是在RLHF阶段给语言模型增加一些约束（`KL`散度），防止语言模型训歪
 
 具体的过程详见这篇知乎帖子，因为我是初次阅读，见解还不够深刻，所以这一部分以帖子为主：[图解大模型RLHF系列之：人人都能看懂的PPO原理与源码解读](https://zhuanlan.zhihu.com/p/677607581)
-
-
-
-# 2 DPO(Direct Preference Optimization)
